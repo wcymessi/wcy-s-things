@@ -1,0 +1,620 @@
+/* ============================================================
+   个人作品集样式
+   结构：变量与基础 → 布局 → 左侧栏 → 主内容 → 项目条目
+        → 关于/联系 → 动效 → 响应式（≤960px 上下布局）
+   ============================================================ */
+
+/* ---------- 变量与基础 ---------- */
+:root {
+  --accent: #5a4fe0;          /* 蓝紫强调色 */
+  --accent-deep: #443bb8;
+  --accent-soft: rgba(90, 79, 224, 0.08);
+  --bg: #fafaf7;
+  --bg-side: #f3f2ec;
+  --ink: #1c1c1e;
+  --ink-2: #55555c;
+  --ink-3: #9a9aa2;
+  --line: #e4e3db;
+  --side-w: 312px;
+  --font-sans: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+  --font-num: "Georgia", "Times New Roman", serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; }
+
+::selection { background: var(--accent); color: #fff; }
+
+/* ---------- 整体布局：左窄右宽 ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: var(--side-w) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* ---------- 左侧栏 ---------- */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: var(--bg-side);
+  border-right: 1px solid var(--line);
+}
+
+.sidebar-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 28px 24px;
+  overflow-y: auto;
+}
+
+/* 头像与身份 */
+.profile { position: relative; }
+
+.nav-toggle { display: none; }
+
+.avatar-wrap {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--bg-side);
+}
+
+.name {
+  margin-top: 18px;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+}
+
+.name::after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 4px;
+  margin-top: 8px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.role {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.tagline {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+/* 导航 */
+.nav {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 12px;
+  margin-left: -12px;
+  border-left: 2px solid transparent;
+  font-size: 14px;
+  color: var(--ink-2);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-no {
+  font-family: var(--font-num);
+  font-size: 11px;
+  color: var(--ink-3);
+  transition: color 0.2s;
+}
+
+.nav-link:hover { color: var(--ink); }
+
+.nav-link.is-active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
+.nav-link.is-active .nav-no { color: var(--accent); }
+
+/* 技能 */
+.skills { margin-top: 34px; }
+
+.side-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+}
+
+.skill-group + .skill-group { margin-top: 16px; }
+
+.skill-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tags li {
+  font-size: 12px;
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink-2);
+}
+
+/* 左栏底部 */
+.side-footer {
+  margin-top: auto;
+  padding-top: 28px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.side-mail {
+  color: var(--ink-2);
+  word-break: break-all;
+  transition: color 0.2s;
+}
+
+.side-mail:hover { color: var(--accent); }
+
+.copyright { margin-top: 6px; }
+
+/* ---------- 右侧主内容 ---------- */
+.main {
+  min-width: 0;
+  padding: 0 clamp(28px, 6vw, 96px);
+}
+
+/* Hero 大标语 */
+.hero {
+  padding: clamp(56px, 10vh, 110px) 0 clamp(40px, 7vh, 72px);
+}
+
+.hero-kicker {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.hero-title {
+  margin-top: 18px;
+  font-size: clamp(38px, 5.2vw, 64px);
+  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--accent);
+  background-image: linear-gradient(transparent 72%, var(--accent-soft) 72%);
+}
+
+.hero-sub {
+  margin-top: 20px;
+  max-width: 520px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.hero-cta {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 10px 22px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.hero-cta:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* 区块通用 */
+.section {
+  padding: clamp(44px, 7vh, 72px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.section--last { padding-bottom: 40px; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: clamp(32px, 5vh, 52px);
+}
+
+.section-index {
+  font-family: var(--font-num);
+  font-size: clamp(40px, 4.5vw, 56px);
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  opacity: 0.85;
+}
+
+.section-title {
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 700;
+}
+
+.section-note {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+}
+
+/* ---------- 项目条目：纵向大图文，奇偶交替 ---------- */
+.project-list { display: flex; flex-direction: column; }
+
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  padding: clamp(32px, 5vh, 52px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.project-list .project:first-child { border-top: none; padding-top: 0; }
+
+/* 偶数项图文方向反转，制造节奏 */
+.project:nth-child(even) { direction: rtl; }
+.project:nth-child(even) > * { direction: ltr; }
+
+.project-figure {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--accent-soft);
+}
+
+.project-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.project:hover .project-figure img { transform: scale(1.035); }
+
+.project-figure figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(28, 28, 30, 0.78);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.project-body { position: relative; }
+
+/* 大号装饰序号 */
+.project-no {
+  position: absolute;
+  top: -0.52em;
+  left: -6px;
+  z-index: -1;
+  font-family: var(--font-num);
+  font-size: clamp(72px, 7vw, 104px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.09;
+  pointer-events: none;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.05em;
+}
+
+.project-cat {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.project-name {
+  margin-top: 10px;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.project:hover .project-name { color: var(--accent); }
+
+.project-desc {
+  margin-top: 12px;
+  font-size: 14.5px;
+  color: var(--ink-2);
+  max-width: 46em;
+}
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.project-stack li {
+  font-size: 12px;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--ink-2);
+}
+
+/* ---------- 关于我 ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.about-lead {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.about-text p + p { margin-top: 16px; }
+
+.about-text p { color: var(--ink-2); }
+.about-text .about-lead { color: var(--ink); }
+
+.about-facts { margin-top: 28px; border-top: 1px solid var(--line); }
+
+.about-facts li {
+  display: flex;
+  gap: 18px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.about-facts strong {
+  flex: 0 0 4.5em;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* 技能：仅在移动端“关于我”内显示 */
+.about-skills-mobile { display: none; }
+
+/* ---------- 联系方式 ---------- */
+.contact-lead {
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 600;
+  max-width: 30em;
+}
+
+.contact-list { margin-top: 30px; }
+
+.contact-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.contact-label {
+  flex: 0 0 4.5em;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+}
+
+.contact-list a {
+  border-bottom: 1px dashed transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.contact-list a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.page-footer {
+  margin-top: clamp(48px, 8vh, 80px);
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* ---------- 入场动效（轻量） ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .project-figure img { transition: none; }
+}
+
+/* ============================================================
+   响应式：≤960px 转为上下布局
+   ============================================================ */
+@media (max-width: 960px) {
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* 左栏 → 顶部 header */
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sidebar-inner {
+    display: block;
+    padding: 26px 22px 18px;
+    overflow: visible;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .avatar-wrap {
+    width: 58px;
+    height: 58px;
+    flex: 0 0 auto;
+  }
+
+  .name { margin-top: 0; font-size: 21px; }
+  .name::after { margin-top: 5px; height: 3px; width: 26px; }
+  .role { margin-top: 3px; font-size: 12px; }
+  .tagline, .side-footer { display: none; }
+
+  /* 导航横排 */
+  .nav {
+    margin-top: 20px;
+    flex-direction: row;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-link {
+    margin-left: 0;
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    white-space: nowrap;
+    font-size: 13px;
+  }
+
+  .nav-no { display: none; }
+
+  .nav-link.is-active {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .skills { display: none; }
+
+  .main { padding: 0 22px; }
+
+  .hero { padding-top: 44px; }
+
+  .section-note { display: none; }
+
+  /* 项目：上图下文单列 */
+  .project,
+  .project:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    direction: ltr;
+    align-items: start;
+  }
+
+  .project-body { order: 2; }
+  .project-figure { order: 1; }
+
+  .project-no { font-size: 60px; top: -0.6em; }
+
+  /* 关于我单列，技能内嵌展示 */
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+
+  .about-skills-mobile { display: block; }
+
+  /* 联系方式行可换行 */
+  .contact-list li { flex-wrap: wrap; gap: 6px 18px; }
+}
+
+/* 窄屏微调 */
+@media (max-width: 480px) {
+  .hero-title { font-size: 34px; }
+  .section-index { font-size: 34px; }
+  .main { padding: 0 18px; }
+  .sidebar-inner { padding: 22px 18px 16px; }
+}

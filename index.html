@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小王 · 个人作品集</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+
+    <!-- ======== 左侧栏（桌面固定 / 移动端顶部） ======== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+
+        <div class="profile">
+          <div class="avatar-wrap">
+            <img class="avatar" src="assets/images/avatar.jpg" alt="个人头像" />
+          </div>
+          <div class="profile-text">
+            <h1 class="name">小王</h1>
+            <p class="role">前端开发专业 · 广州软件学院在读</p>
+            <p class="tagline">关注 AI 辅助开发与大语言模型应用。</p>
+          </div>
+          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="展开导航菜单">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+
+        <nav class="nav" id="siteNav" aria-label="页面导航">
+          <a href="#work" class="nav-link is-active" data-target="work"><span class="nav-no">01</span>项目作品</a>
+          <a href="#about" class="nav-link" data-target="about"><span class="nav-no">02</span>关于我</a>
+          <a href="#contact" class="nav-link" data-target="contact"><span class="nav-no">03</span>联系方式</a>
+        </nav>
+
+        <div class="skills">
+          <h2 class="side-title">技能方向</h2>
+          <div class="skill-group">
+            <h3 class="skill-label">编程语言</h3>
+            <ul class="skill-tags">
+              <li>Python</li>
+              <li>Java</li>
+              <li>TypeScript</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3 class="skill-label">前端</h3>
+            <ul class="skill-tags">
+              <li>HTML / CSS</li>
+              <li>Vue</li>
+              <li>ECharts</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3 class="skill-label">AI / 后端</h3>
+            <ul class="skill-tags">
+              <li>FastAPI</li>
+              <li>RAG</li>
+              <li>LLM 应用</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="side-footer">
+          <h2 class="side-title">快捷联系</h2>
+          <ul class="side-links">
+            <li><a href="mailto:wangchenyu@example.com">wangchenyu@example.com</a></li>
+            <li><a href="https://github.com/wangchenyu-dev" target="_blank" rel="noopener">GitHub · wangchenyu-dev</a></li>
+            <li><a href="https://wangchenyu.dev" target="_blank" rel="noopener">wangchenyu.dev</a></li>
+          </ul>
+          <p class="copyright">© 2026 小王 · Portfolio</p>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ======== 右侧主内容 ======== -->
+    <main class="main">
+
+      <header class="hero">
+        <p class="hero-kicker">Portfolio · 2026</p>
+        <h2 class="hero-title">用代码与 AI<br />把想法变成<em>产品</em></h2>
+        <p class="hero-sub">这里收录了我在课程与实践中的项目作品，涵盖小程序开发、Web 全栈、数据可视化与大语言模型应用。</p>
+        <a class="hero-cta" href="#work">浏览项目 ↓</a>
+      </header>
+
+      <!-- 01 项目作品 -->
+      <section class="section" id="work">
+        <div class="section-head">
+          <span class="section-index">01</span>
+          <h2 class="section-title">项目作品</h2>
+          <p class="section-note">持续更新中 · 最新在前</p>
+        </div>
+        <!-- 项目由 script.js 依据 PROJECTS 数据动态渲染，新增项目只需在 script.js 中添加一条数据 -->
+        <div class="project-list" id="projectList"></div>
+      </section>
+
+      <!-- 02 关于我 -->
+      <section class="section" id="about">
+        <div class="section-head">
+          <span class="section-index">02</span>
+          <h2 class="section-title">关于我</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p class="about-lead">
+              你好，我是小王，一名前端开发专业的学生，目前主要关注 AI 辅助开发与大语言模型技术。
+            </p>
+            <p>
+              平时我主要使用 Python、Java 和 TypeScript 进行项目开发，也在持续学习前后端开发、数据可视化和 AI 应用构建。
+              从小程序到全栈平台，再到基于大模型的课程问答工具，我喜欢把学到的新技术尽快用到真实场景里去验证。
+            </p>
+            <p>
+              我习惯从需求出发思考产品：功能如何更简单、信息如何更清晰、交互如何更自然。
+              我相信扎实的基础和持续学习，是走向职业开发者最重要的两条路径。
+            </p>
+            <ul class="about-facts">
+              <li><strong>教育背景</strong>广州软件学院 · 前端开发专业 · 在读</li>
+              <li><strong>当前方向</strong>AI 辅助开发 / 大语言模型应用</li>
+              <li><strong>所在地</strong>中国 · 广州</li>
+              <li><strong>状态</strong>开放实习与校招机会</li>
+            </ul>
+          </div>
+
+          <div class="about-skills-mobile">
+            <h2 class="side-title">技能方向</h2>
+            <div class="skill-group">
+              <h3 class="skill-label">编程语言</h3>
+              <ul class="skill-tags">
+                <li>Python</li><li>Java</li><li>TypeScript</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 class="skill-label">前端</h3>
+              <ul class="skill-tags">
+                <li>HTML / CSS</li><li>Vue</li><li>ECharts</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 class="skill-label">AI / 后端</h3>
+              <ul class="skill-tags">
+                <li>FastAPI</li><li>RAG</li><li>LLM 应用</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 联系方式 -->
+      <section class="section section--last" id="contact">
+        <div class="section-head">
+          <span class="section-index">03</span>
+          <h2 class="section-title">联系方式</h2>
+        </div>
+
+        <div class="contact-wrap">
+          <p class="contact-lead">如果你对我的作品感兴趣，欢迎通过以下方式联系我。</p>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">邮箱</span>
+              <a href="mailto:wangchenyu@example.com">wangchenyu@example.com</a>
+            </li>
+            <li>
+              <span class="contact-label">微信</span>
+              <span>001550</span>
+            </li>
+            <li>
+              <span class="contact-label">GitHub</span>
+              <a href="https://github.com/wangchenyu-dev" target="_blank" rel="noopener">github.com/wangchenyu-dev</a>
+            </li>
+            <li>
+              <span class="contact-label">个人主页</span>
+              <a href="https://wangchenyu.dev" target="_blank" rel="noopener">wangchenyu.dev</a>
+            </li>
+            <li>
+              <span class="contact-label">所在地</span>
+              <span>中国 · 广州</span>
+            </li>
+          </ul>
+        </div>
+
+        <footer class="page-footer">
+          <p>© 2026 小王 · 用原生 HTML / CSS / JS 构建</p>
+        </footer>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
