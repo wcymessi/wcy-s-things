@@ -1,8 +1,60 @@
 /* ============================================================
    小王 · 个人作品集脚本
-   1. PROJECTS 项目数据：新增项目只需在此数组中添加一个对象
-   2. 渲染项目列表 / 导航滚动高亮 / 移动端折叠导航
+   1. 深浅色主题：读取 localStorage 并立即应用，切换后写入记忆
+   2. PROJECTS 项目数据：新增项目只需在此数组中添加一个对象
+   3. 渲染项目列表 / 导航滚动高亮 / 移动端折叠导航
    ============================================================ */
+
+/* ---------- 深浅色主题 ---------- */
+const THEME_KEY = "portfolio-theme";
+const THEME_LIGHT = "light";
+const THEME_DARK = "dark";
+
+/* 读取上次选择；无记录或存储不可用时使用浅色 */
+function readSavedTheme() {
+  try {
+    return localStorage.getItem(THEME_KEY) === THEME_DARK ? THEME_DARK : THEME_LIGHT;
+  } catch (err) {
+    return THEME_LIGHT;
+  }
+}
+
+const savedTheme = readSavedTheme();
+
+/* 本脚本在 body 末尾同步执行，此处设置主题可在首次绘制前生效，避免刷新闪烁 */
+document.documentElement.setAttribute("data-theme", savedTheme);
+
+/* ---------- 主题切换按钮 ---------- */
+function initThemeToggle() {
+  const toggle = document.getElementById("themeToggle");
+  if (!toggle) return;
+
+  const syncToggle = theme => {
+    const isDark = theme === THEME_DARK;
+    const label = isDark ? "切换为浅色主题" : "切换为深色主题";
+    toggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+    toggle.setAttribute("aria-label", label);
+    toggle.setAttribute("title", label);
+  };
+
+  syncToggle(savedTheme);
+
+  toggle.addEventListener("click", () => {
+    const next = document.documentElement.getAttribute("data-theme") === THEME_DARK
+      ? THEME_LIGHT
+      : THEME_DARK;
+
+    document.documentElement.setAttribute("data-theme", next);
+
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch (err) {
+      /* 隐私模式等存储不可用时，主题仅在本次会话内生效 */
+    }
+
+    syncToggle(next);
+  });
+}
 
 /* ---------- 项目数据 ----------
    字段：name 项目名 | desc 简介 | stack 技术栈数组
@@ -124,4 +176,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProjects();
   initScrollSpy();
   initMobileNav();
+  initThemeToggle();
 });
